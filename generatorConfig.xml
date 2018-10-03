@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<!-- ojdbc6.jar已经直接放到项目中,无需指定了,同时mysql驱动包也一样,这里同样无需指定 -->
+	<!-- <classPathEntry location="ojdbc6.jar" /> -->
+	<context id="context1" targetRuntime="MyBatis3">
+		<!-- 指定生成的java文件的编码,没有直接生成到项目时中文可能会乱码 -->
+		<property name="javaFileEncoding" value="UTF-8" />
+		<!-- 这里的type里写的是你的实现类的类全路径 -->
+		<commentGenerator
+			type="com.yaodela.gen.MyCommentGenerator">
+		</commentGenerator>
+
+		<!-- mysql配置 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/test"
+			userId="test" password="test123_321">
+			<property name="useInformationSchema" value="true"></property>
+		</jdbcConnection>
+		
+		<!--修改数据类型映射  如果用默认的包装类型 删除type属性即可  -->
+		<javaTypeResolver type="com.yaodela.gen.MyJavaTypeResolverDefaultImpl">
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- targetPackage:生成实体Model类的包路径 -->
+		<javaModelGenerator targetPackage="com.huameng.model"
+			targetProject="d:\mybatisgen">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- mybatis xml file -->
+		<sqlMapGenerator targetPackage="com.huameng.mapper"
+			targetProject="d:\mybatisgen">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!-- mapper class -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="resources/mybatis/mappers" targetProject="d:\mybatisgen">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+
+		<!--配置要映射的表及实体类名 -->
+		<table schema="" tableName="t_sys_region"
+			domainObjectName="SysRegion" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
+		<table schema="" tableName="t_shop"
+			domainObjectName="Shop" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
+	</context>
+</generatorConfiguration>
